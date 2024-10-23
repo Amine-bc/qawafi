@@ -1,6 +1,6 @@
 import glob
 
-from .utils import (
+from utils import (
     BOHOUR_NAMES,
     find_mismatch,
     label2name,
@@ -9,7 +9,7 @@ from .utils import (
     vocab,
     BOHOUR_NAMES_AR,
 )
-from .models import create_transformer_model, create_model_v1, create_era_theme_model
+from models import create_transformer_model, create_model_v1, create_era_theme_model
 from tensorflow.keras.models import Model
 from datasets import load_from_disk
 import tkseem as tk
@@ -57,11 +57,12 @@ class BaitAnalysis:
         if self.use_cbhg:
             print("load diacritization model ... ")
             try:
-                from Arabic_Diacritization.predict import DiacritizationTester
+                from Arabic_Diacritization.poetry_diacritizer.predict import DiacritizationTester
 
                 self.diac_model = DiacritizationTester(
-                    "Arabic_Diacritization/config/test.yml", "cbhg"
+                    "./Arabic_Diacritization/poetry_diacritizer/config/test.yml", "cbhg", "./CA_MSA.base.cbhg/models/175000-snapshot.pt"
                 )
+                
                 self.text_encoder = self.diac_model.text_encoder
             except Exception as e:
                 print(traceback.format_exc())

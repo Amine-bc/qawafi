@@ -20,7 +20,7 @@ from tensorflow.keras.layers import (
     Input,
 )
 from tensorflow.keras.models import Sequential
-from .utils import label2name, char2idx
+from utils import label2name, char2idx
 
 
 def create_model_v1():
